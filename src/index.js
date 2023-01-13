@@ -124,7 +124,7 @@ function inMoreLoad() {
   
       })).join('');
   
-      refs.listEl.insertAdjacentHTML('beforeend', markup);
+      refs.listElem.insertAdjacentHTML('beforeend', markup);
   } 
     
     
