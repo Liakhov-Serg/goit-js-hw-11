@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = `32810341-69b544567d84cbcabae0736a6`;
 
-export function getGallery(value, page) {
+export function getGallery(value, page, per_page) {
     const config = {
             key: API_KEY,
             q: value,
@@ -11,7 +11,7 @@ export function getGallery(value, page) {
             orientation: "horizontal",
         safesearch: "true",
         page: page,
-        per_page: 40,
+        per_page: per_page,
         
     }
  const response = axios.get(`${BASE_URL}`,{ params: config });
