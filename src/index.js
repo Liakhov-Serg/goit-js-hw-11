@@ -18,34 +18,36 @@ console.log(555);
 import {getGallery} from "./galleryAPI";
 
 const refs = {
-    formEl: document.querySelector('#search-form'),
-    listEl: document.querySelector('.gallery'),
+    formElem: document.querySelector('#search-form'),
+    listElem: document.querySelector('.gallery'),
+    moreBtn: document.querySelector(`.more`)
 }
-refs.formEl.addEventListener('submit', onSearch);
+refs.formElem.addEventListener('submit', inSearch);
+refs.moreBtn.addEventListener('submit', inMoreLoad);
+
+let value = "";
+let currentPage = 1;
 
 
-
-async function onSearch(e) {
+function inSearch(e) {
     e.preventDefault();
    
-    
-    
     value = e.target.elements.searchQuery.value;
     console.log(value);
     
    // getGallery(value).then(data => console.log(data.data.hits));
     //console.log(getGallery);
-    clearContainer();
-    try {
-        const card = await getGallery(value).then(res => {
-           // console.log(data.data.hits);
-            renderCard(res.data.hits);
-        })
+    // clearContainer();
+    // try {
+    //     const card = await getGallery(value).then(res => {
+    //        // console.log(data.data.hits);
+    //         renderCard(res.data.hits);
+    //     })
         
         
-    } catch (error) {
-       // console.log("error")
-    }
+    // } catch (error) {
+    //    // console.log("error")
+    // }
       
     
     
@@ -75,10 +77,10 @@ function renderCard(hits) {
 </div>`
             
     })).join('');
-    refs.listEl.insertAdjacentHTML('beforeend', markup);
+    refs.listElem.insertAdjacentHTML('beforeend', markup);
 }
 function clearContainer() {
-    refs.listEl.innerHTML = ''; 
+    refs.listElem.innerHTML = ''; 
     
 }
 function checkSpaces(string) {
