@@ -1,19 +1,9 @@
 
-// import {ApiServ} from "./galleryAPI";
-// import createCard from ``;
+
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
-
-// new SimpleLightbox(`.card a`, {
-//     `captions`:true,
-//     `captionsData`:`alt`,
-
-// }
-
-// )
-console.log(555);
 
 import {getGallery} from "./galleryAPI";
 
@@ -35,8 +25,8 @@ function inSearch(e) {
     value = e.target.elements.searchQuery.value;
     // console.log(value);
     
-   getGallery(value).then(data => console.log(data.data.hits));
-    console.log(getGallery);
+  //  getGallery(value).then(data => console.log(data.data.hits));
+    // console.log(getGallery);
     // clearContainer();
     // try {
     //     const card = await getGallery(value).then(res => {
@@ -74,8 +64,8 @@ async function getCard(value) {
 
    } 
    catch (error) {
-    // Notify.failure("Sorry, there are no images matching your search query. Please try again.")
-
+    Notify.failure("Sorry, there are no images matching your search query. Please try again.")
+console.log(error);
  }
  return {}
 }
@@ -105,6 +95,7 @@ function inMoreLoad() {
     function renderCard(hits) {
       const markup = hits.map((({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
           return `<div class="photo-card">
+          <a class="gallery__item" href="${largeImageURL}"></a>
     <img src="${webformatURL}" data-src="${largeImageURL}" alt="${tags}" loading="lazy" />
     <div class="info">
       <p class="info-item">
@@ -125,7 +116,9 @@ function inMoreLoad() {
       })).join('');
   
       refs.listElem.insertAdjacentHTML('beforeend', markup);
-  } 
+      let gallery = new SimpleLightbox('.gallery a');
+      gallery.refresh(); 
+    } 
     
     
     // console.log(galleryApi);
