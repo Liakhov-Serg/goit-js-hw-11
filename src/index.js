@@ -1,5 +1,6 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import SimpleLightbox from "simplelightbox";
+
+import SimpleLightbox from 'simplelightbox';
 import "simplelightbox/dist/simple-lightbox.min.css";
 import {getGallery} from "./galleryAPI";
 
@@ -62,12 +63,12 @@ function inMoreLoad() {
    }
  })
 }
-// window.addEventListener('scroll', () => {
-//   if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
-//     // alert('At the bottom!');
-//     inMoreLoad();
-//   }
-// });
+window.addEventListener('scroll', () => {
+  if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+    // alert('At the bottom!');
+    inMoreLoad();
+  }
+});
    
     function renderCard(hits) {
       const markup = hits.map((({ webformatURL, largeImageURL,
