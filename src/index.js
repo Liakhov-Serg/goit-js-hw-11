@@ -9,7 +9,7 @@ const refs = {
     moreBtn: document.querySelector(`.more`)
 }
 refs.formElem.addEventListener('submit', inSearch);
-refs.moreBtn.addEventListener('submit', inMoreLoad);
+refs.moreBtn.addEventListener('click', inMoreLoad);
 
 let value = "";
 let currentPage = 1;
@@ -73,9 +73,9 @@ window.addEventListener('scroll', () => {
       const markup = hits.map((({ webformatURL, largeImageURL,
          tags, likes, views, comments, downloads }) => {
           return `<div class="photo-card">
-          <a class="gallery__item" href="${largeImageURL}"></a>
+          <a class="gallery__item" href="${largeImageURL}">
     <img src="${webformatURL}" data-src="${largeImageURL}" 
-    alt="${tags}" loading="lazy" />
+    alt="${tags}" loading="lazy" /></a>
     <div class="info">
       <p class="info-item">
         <b>Likes:</b> ${likes}
@@ -95,6 +95,7 @@ window.addEventListener('scroll', () => {
       })).join('');
   
       refs.listElem.insertAdjacentHTML('beforeend', markup);
+      
       let gallery = new SimpleLightbox('.gallery a');
       gallery.refresh();
       onScrollDocument(); 
