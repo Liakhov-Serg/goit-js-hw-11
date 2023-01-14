@@ -17,25 +17,15 @@ let currentPer_page = 40;
 
 function inSearch(e) {
     e.preventDefault();
-   
-    value = e.target.elements.searchQuery.value;
+       value = e.target.elements.searchQuery.value;
     // console.log(value);
     
-  
-    //     })
     refs.moreBtn.style.visibility = "visible";
     currentPage = 1;
      e.target.reset(); 
      clearContainer();
      getCard(value);
 
-
-
-  //refs.loadMoreBtn.disabled = false;    
-
-    // console.log(galleryApi);
-    // if (galleryApi.value === '')
-    //     return console.log("Sorry, there are no images matching your search query. Please try again.") 
 }
 async function getCard(value) {
   try {
@@ -45,6 +35,7 @@ async function getCard(value) {
 
          if (res.data.hits.length > 0 && checkSpaces(value)) {
            renderCard(res.data.hits);
+           Notify.success(`Hooray! We found ${res.data.totalHits} images.`);
            return res;
          } else {
            throw new Error('404');
@@ -61,25 +52,23 @@ console.log(error);
 function inMoreLoad() {
  currentPage += 1;
 
-
  getCard(value).then((res) => {
    console.log(res);
    let total_pages = res.data.totalHits / currentPer_page;
 
-   Notify.success(`Hooray! We found ${res.data.totalHits} images.`);
-   // console.log(currentPage);
-   // console.log(total_pages);
-   if (currentPage >= total_pages) {
-     refs.moreBtn.hidden = true;
+     if (currentPage >= total_pages) {
+     refs.moreBtn.style.visibility = "hidden";
      Notify.failure("We're sorry, but you've reached the end of search results.");
    }
  })
-
-
 }
-    // } catch (error) {
-    //    // console.log("error")
-    // }
+window.addEventListener('scroll', () => {
+  if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+    // alert('At the bottom!');
+    inMoreLoad();
+  }
+});
+   
     function renderCard(hits) {
       const markup = hits.map((({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
           return `<div class="photo-card">
@@ -105,42 +94,26 @@ function inMoreLoad() {
   
       refs.listElem.insertAdjacentHTML('beforeend', markup);
       let gallery = new SimpleLightbox('.gallery a');
-      gallery.refresh(); 
+      gallery.refresh();
+      onScrollDocument(); 
     } 
     
-    
-    // console.log(galleryApi);
-    // if (galleryApi.value === '')
-    //     return console.log("Sorry, there are no images matching your search query. Please try again.") 
+  
 
-
-// function renderCard(hits) {
-//     const markup = hits.map((({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
-//         return `<div class="photo-card">
-//   <img src="${webformatURL}" data-src="${largeImageURL}" alt="${tags}" loading="lazy" />
-//   <div class="info">
-//     <p class="info-item">
-//       <b>${likes}</b>
-//     </p>
-//     <p class="info-item">
-//       <b>${views}</b>
-//     </p>
-//     <p class="info-item">
-//       <b>${comments}</b>
-//     </p>
-//     <p class="info-item">
-//       <b>${downloads}</b>
-//     </p>
-//   </div>
-// </div>`
-            
-//     })).join('');
-//     refs.listElem.insertAdjacentHTML('beforeend', markup);
-// }
 function clearContainer() {
   refs.listElem.innerHTML = ''; 
   
 }
 function checkSpaces(string) {
 return string.trim() !== '';
+}
+function onScrollDocument(e) {
+  const { height: cardHeight } = document
+  .querySelector(".gallery")
+  .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+  top: cardHeight * 2,
+  behavior: "smooth",
+  }); 
 }
