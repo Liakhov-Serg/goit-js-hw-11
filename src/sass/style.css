@@ -31,10 +31,13 @@
         min-width: 35px;
         padding: 0;
         border: none;
-        background-color: #7550fc7a;
+        background-color: #17d83d7a;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
 
+    }
+    .more {
+        background-color: crimson;
     }
 
     button:hover,
