@@ -30,8 +30,8 @@ function inSearch(e) {
 async function getCard(value) {
   try {
        const res = await getGallery(value, currentPage)
-           //console.log(res.data.hits);
-         //console.log(res.data.totalHits);
+        //    console.log(res.data.hits);
+        //  console.log(res.data.totalHits);
 
          if (res.data.hits.length > 0 && checkSpaces(value)) {
            renderCard(res.data.hits);
@@ -62,18 +62,20 @@ function inMoreLoad() {
    }
  })
 }
-window.addEventListener('scroll', () => {
-  if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
-    // alert('At the bottom!');
-    inMoreLoad();
-  }
-});
+// window.addEventListener('scroll', () => {
+//   if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+//     // alert('At the bottom!');
+//     inMoreLoad();
+//   }
+// });
    
     function renderCard(hits) {
-      const markup = hits.map((({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
+      const markup = hits.map((({ webformatURL, largeImageURL,
+         tags, likes, views, comments, downloads }) => {
           return `<div class="photo-card">
           <a class="gallery__item" href="${largeImageURL}"></a>
-    <img src="${webformatURL}" data-src="${largeImageURL}" alt="${tags}" loading="lazy" />
+    <img src="${webformatURL}" data-src="${largeImageURL}" 
+    alt="${tags}" loading="lazy" />
     <div class="info">
       <p class="info-item">
         <b>Likes:</b> ${likes}
