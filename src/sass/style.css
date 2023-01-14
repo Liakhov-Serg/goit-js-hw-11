@@ -34,10 +34,18 @@
         background-color: #17d83d7a;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
+        
 
     }
     .more {
         background-color: crimson;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        width: 120px;
+        height: 40px;
+        border-radius: 10px;
     }
 
     button:hover,
@@ -87,10 +95,10 @@
         text-align: center;
         height: 50px;
         padding: 2px;
-        border-bottom: 1px solid rgb(18, 208, 255);
+        border: 1px solid rgb(255, 152, 18);
         border-bottom-left-radius: 2px;
         border-bottom-right-radius: 2px;
-        box-shadow: 0px 1px 1px rgba(141, 116, 250, 0.12), 0px 4px 4px rgba(141, 116, 250, 0.12), 1px 4px 6px rgba(141, 116, 250, 0.12);
+        /* box-shadow: 0px 1px 1px rgba(141, 116, 250, 0.12), 0px 4px 4px rgba(141, 116, 250, 0.12), 1px 4px 6px rgba(141, 116, 250, 0.12); */
     }
      .load-more {
         font: inherit;

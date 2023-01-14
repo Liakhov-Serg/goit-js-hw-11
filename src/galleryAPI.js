@@ -16,6 +16,5 @@ export function getGallery(value, page, per_page) {
     }
  const response = axios.get(`${BASE_URL}`,{ params: config });
     return response;
-
    
 } 

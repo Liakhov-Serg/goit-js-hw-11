@@ -1,10 +1,6 @@
-
-
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
-
 import {getGallery} from "./galleryAPI";
 
 const refs = {
@@ -25,20 +21,12 @@ function inSearch(e) {
     value = e.target.elements.searchQuery.value;
     // console.log(value);
     
-  //  getGallery(value).then(data => console.log(data.data.hits));
-    // console.log(getGallery);
-    // clearContainer();
-    // try {
-    //     const card = await getGallery(value).then(res => {
-    //        // console.log(data.data.hits);
-    //         renderCard(res.data.hits);
+  
     //     })
-    refs.moreBtn.hidden = false;
+    refs.moreBtn.style.visibility = "visible";
     currentPage = 1;
      e.target.reset(); 
-
      clearContainer();
-
      getCard(value);
 
 
@@ -82,7 +70,7 @@ function inMoreLoad() {
    // console.log(currentPage);
    // console.log(total_pages);
    if (currentPage >= total_pages) {
-     refs.loadMoreBtn.hidden = true;
+     refs.moreBtn.hidden = true;
      Notify.failure("We're sorry, but you've reached the end of search results.");
    }
  })
