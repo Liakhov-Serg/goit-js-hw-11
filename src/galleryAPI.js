@@ -11,7 +11,7 @@ export function getGallery(value, page, per_page) {
             orientation: "horizontal",
         safesearch: "true",
         page: page,
-        per_page: per_page,
+        per_page: 40,
         
     }
  const response = axios.get(`${BASE_URL}`,{ params: config });

@@ -15,6 +15,15 @@ let value = "";
 let currentPage = 1;
 let currentPer_page = 40;
 
+// document.querySelector('.more').onclick = function (e) {
+//   let a = document.querySelector('.more');
+//   if (!a.style.display) {
+//       a.style.display = 'none';
+//   } else {
+//       a.style.display = '';
+//   }
+// }
+
 function inSearch(e) {
     e.preventDefault();
        value = e.target.elements.searchQuery.value;
