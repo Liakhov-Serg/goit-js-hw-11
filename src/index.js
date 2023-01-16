@@ -34,7 +34,8 @@ function inSearch(e) {
      e.target.reset(); 
      clearContainer();
      getCard(value);
-
+    
+console.log("111");
 }
 async function getCard(value) {
   try {
@@ -107,7 +108,8 @@ window.addEventListener('scroll', () => {
       
       let gallery = new SimpleLightbox('.gallery a');
       gallery.refresh();
-      onScrollDocument(); 
+      onScrollDocument();
+      refs.moreBtn.style.display = "block"; 
     } 
     
   
