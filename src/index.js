@@ -35,7 +35,6 @@ function inSearch(e) {
      clearContainer();
      getCard(value);
     
-console.log("111");
 }
 async function getCard(value) {
   try {
