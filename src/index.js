@@ -34,43 +34,50 @@ function inSearch(e) {
      e.target.reset(); 
      clearContainer();
      getCard(value);
+
+     
     
 }
 async function getCard(value) {
   try {
-       const res = await getGallery(value, currentPage)
-        //    console.log(res.data.hits);
-        //  console.log(res.data.totalHits);
-
-         if (res.data.hits.length > 0 && checkSpaces(value)) {
+       const res = await getGallery(value, currentPage);
+        
+         if (res.data.hits.length > 0 ) {
            renderCard(res.data.hits);
            Notify.success(`Hooray! We found ${res.data.totalHits} images.`);
+           if (currentPage * currentPer_page >= res.data.totalHits) {
+            refs.moreBtn.style.display = "none";
+          }  
            return res;
          } else {
            throw new Error('404');
          }
+           
 
    } 
    catch (error) {
     Notify.failure("Sorry, there are no images matching your search query. Please try again.")
 console.log(error);
  }
- return {}
+ 
 }
 
 function inMoreLoad() {
  currentPage += 1;
 
  getCard(value).then((res) => {
-   console.log(res);
+  //  console.log(res);
    let total_pages = res.data.totalHits / currentPer_page;
 
      if (currentPage >= total_pages) {
      refs.moreBtn.style.visibility = "hidden";
      Notify.failure("We're sorry, but you've reached the end of search results.");
-   }
+     
+   } else {refs.moreBtn.style.display = "none"};
+  //  console.log(currentPage, total_pages);
  })
 }
+
 window.addEventListener('scroll', () => {
   if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
     // alert('At the bottom!');
